@@ -1,4 +1,4 @@
-﻿Simple ASP.NET RESTFull Service
+﻿Simple .NET RESTfull Webserivce
 ===============================
 
 This is a little library which I thought might be usefull if working with ASP.NET and some javascript library like Backbone.js
@@ -17,8 +17,8 @@ the ids in your views as primery keys. This hack needs to be done in the designe
 
 ### How it should look like:###
 
-![first step](Simple-ASP.NET-RESTFull-Service/raw/master/res/one.jpg)
-![second step](Simple-ASP.NET-RESTFull-Service/raw/master/res/two.jpg)
+![first step](DotNetREST/raw/master/res/one.jpg)
+![second step](DotNetREST/raw/master/res/two.jpg)
 
 This enables us to make something like this
 
