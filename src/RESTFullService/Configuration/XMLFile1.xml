@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<RESTFullService>
+  <RequestDefaultOptions>
+    <add Name="" Value="" />
+    <add Name="" Value="" />
+  </RequestDefaultOptions>
+  <RESTHandlers>
+    <add Name="" Type="" />
+    <add Name="" Type="" />
+  </RESTHandlers>
+</RESTFullService>
