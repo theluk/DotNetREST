@@ -59,3 +59,55 @@ RESTHandlers
 
 There are a few types you can inherit to build a RESTHandler that will handle you request.
 
+The simplest way to create a handler is when you use LinqToSql. Then you would do just this.
+
+	Imports RESTFullService
+
+	Public Class MyModelHandler
+		Inherits LinqModelRESTHandler(Of MyModelView, Integer)
+
+		Sub New()
+			Me.DB = new testDataContext()
+		End Sub
+
+		Protected Overrides Function GetByID(ByVal id As Integer) As MyModelView
+			Return (From i In CType(DB, testDataContext).MyModelView Where id = i.id Select i).SingleOrDefault
+		End Function
+
+	End Class
+
+This simple one handles **Insert**, **Update**, **Delete**, **Get(id)** and **Get**
+You can override all these Functions
+
+Routing
+-------
+
+	Public Class Global_asax
+		Inherits System.Web.HttpApplication
+
+		Shared Sub RegisterRoutes(ByVal routes As RouteCollection)
+
+			Dim models As New Route("API/{type}", New RESTFullService.RouteHandler)
+			Dim model As New Route("API/{type}/{id}", New RESTFullService.RouteHandler)
+
+			routes.Add(model)
+			routes.Add(models)
+
+		End Sub
+
+		Sub Application_Start(ByVal sender As Object, ByVal e As EventArgs)
+
+			RegisterRoutes(RouteTable.Routes)
+
+		End Sub
+
+	End Class
+
+The **type** parameter is the **name** property you added in your web.config. 
+
+	GET		localhost/API/MyModel	->	MyProj.MyModelHandler.Get()		-> ArrayOfMyModel
+	GET		localhost/API/MyModel/1 ->	MyProj.MyModelHandler.Get(1)	-> MyModel
+	POST	localhost/API/MyModel	->	MyProj.MyModelHandler.Insert(o)	-> MyModel
+	PUT		localhost/API/MyModel/1	->	MyProj.MyModelHandler.Update(o)	-> MyModel
+	DELETE	localhost/API/MyModel/1	->	MyProj.MyModelHandler.Delete(1)	-> Null
+
